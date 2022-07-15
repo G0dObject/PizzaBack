@@ -9,13 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infastructure", "Infastructure", "{8B80140E-E66B-4DAB-905A-FA66A5B9F494}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pizza.Domain", "Pizza.Domain\Pizza.Domain.csproj", "{44379A48-7897-4486-9DF1-0D0D64D3F517}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pizza.Domain", "Pizza.Domain\Pizza.Domain.csproj", "{44379A48-7897-4486-9DF1-0D0D64D3F517}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notes.Persistent", "Notes.Persistent\Notes.Persistent.csproj", "{4E07C18E-DB02-46ED-9FED-979EB39E6D3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pizza.Persistent", "Notes.Persistent\Pizza.Persistent.csproj", "{4E07C18E-DB02-46ED-9FED-979EB39E6D3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pizza.Application", "Pizza.Application\Pizza.Application.csproj", "{D25E026C-827C-45F1-AFAE-E4720F8DF374}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pizza.Application", "Pizza.Application\Pizza.Application.csproj", "{D25E026C-827C-45F1-AFAE-E4720F8DF374}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pizza.Api", "Pizza.Api\Pizza.Api.csproj", "{BDC2BFFF-B600-4539-96B8-CA979BE5ADD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pizza.Api", "Pizza.Api\Pizza.Api.csproj", "{BDC2BFFF-B600-4539-96B8-CA979BE5ADD9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

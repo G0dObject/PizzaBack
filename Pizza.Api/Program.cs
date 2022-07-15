@@ -1,25 +1,33 @@
+using Pizza.Persistent;
+using Pizza.Persistent.EntityTypeContext;
+
 namespace Pizza.Api
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddControllers();
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
+            _ = builder.Services.AddControllers();
+            _ = builder.Services.AddEndpointsApiExplorer();
+            _ = builder.Services.AddSwaggerGen();
+            _ = builder.Services.AddPersistence(builder.Configuration);
 
-            var app = builder.Build();
+            WebApplication? app = builder.Build();
+
+            using Context? scope = app.Services.CreateScope().ServiceProvider.GetRequiredService<Context>();
+
+
+            Initializer.Initialize(scope);
 
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                _ = app.UseSwagger();
+                _ = app.UseSwaggerUI();
             }
-
-            app.UseHttpsRedirection();
-            app.UseAuthorization();
-            app.MapControllers();
+            _ = app.UseHttpsRedirection();
+            _ = app.UseAuthorization();
+            _ = app.MapControllers();
             app.Run();
         }
     }
