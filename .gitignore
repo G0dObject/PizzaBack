@@ -32,6 +32,8 @@ Latest commit 491040e on Jan 26
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
 # User-specific files
+bin/
+obj/
 *.rsuser
 *.suo
 *.user
@@ -258,6 +260,8 @@ _pkginfo.txt
 !?*.[Cc]ache/
 
 # Others
+bin/
+obj/
 ClientBin/
 ~$*
 *~
