@@ -6,7 +6,6 @@
         public virtual string? Title { get; set; }
         public virtual string? ImageUrl { get; set; }
         public virtual decimal Rating { get; set; }
-        public virtual decimal Price { get; set; }       
-        
+        public virtual decimal Price { get; set; }
     }
 }
