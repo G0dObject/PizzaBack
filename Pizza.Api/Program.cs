@@ -15,10 +15,9 @@ namespace Pizza.Api
 
             WebApplication? app = builder.Build();
 
-            using Context? scope = app.Services.CreateScope().ServiceProvider.GetRequiredService<Context>();
+            using Context? db = app.Services.CreateScope().ServiceProvider.GetRequiredService<Context>();
 
-
-            Initializer.Initialize(scope);
+            Task.Run(()=> Initializer.Initialize(db));
 
             if (app.Environment.IsDevelopment())
             {

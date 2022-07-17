@@ -14,9 +14,9 @@ namespace Pizza.Api.Controllers
         [HttpGet]
         public string Test()
         {
-            context.Pizza.Add(new Domain.Entity.Food.Pizza { });
+            if (context.Pizza != null) context.Pizza.Add(new Domain.Entity.Food.Pizza());
             context.SaveChangesAsync(new CancellationToken());
-            return "Test";
+            return "Test";            
         }
     }
 }
