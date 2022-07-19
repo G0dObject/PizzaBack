@@ -1,5 +1,4 @@
 ﻿using Pizza.Persistent.EntityTypeContext;
-
 namespace Pizza.Persistent
 {
     public static class Initializer

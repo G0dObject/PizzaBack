@@ -12,11 +12,11 @@ namespace Pizza.Api.Controllers
         public ValuesController(Context _context) => context = _context;
 
         [HttpPost]
-        public ICollection<int> Test(List<int>aboba)
+        public ICollection<int> Test(List<int> numbers)
         {            
             if (context.Pizza  != null) context.Pizza.Add(new Domain.Entity.Food.Pizza());
             context.SaveChangesAsync(new CancellationToken());
-            return aboba;            
+            return numbers;            
         }
     }
 }
