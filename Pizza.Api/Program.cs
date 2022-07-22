@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Pizza.Persistent;
 using Pizza.Persistent.EntityTypeContext;
 
@@ -11,13 +12,13 @@ namespace Pizza.Api
             _ = builder.Services.AddControllers();
             _ = builder.Services.AddEndpointsApiExplorer();
             _ = builder.Services.AddSwaggerGen();
-            _ = builder.Services.AddPersistence(builder.Configuration);
+            _ = builder.Services.AddDependency(builder.Configuration, builder.Environment.IsDevelopment());
+            /*_ = builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<Context>();*/
 
             WebApplication? app = builder.Build();
 
             using Context? db = app.Services.CreateScope().ServiceProvider.GetRequiredService<Context>();
-
-            Task.Run(()=> Initializer.Initialize(db));
+            _ = Task.Run(async () => await Initializer.Initialize(db));
 
             if (app.Environment.IsDevelopment())
             {
@@ -25,9 +26,10 @@ namespace Pizza.Api
                 _ = app.UseSwaggerUI();
             }
             _ = app.UseHttpsRedirection();
-            _ = app.UseAuthorization();
+            //_ = app.UseAuthentication();
+            //_ = app.UseAuthorization();
             _ = app.MapControllers();
             app.Run();
-        }
+        }   
     }
 }

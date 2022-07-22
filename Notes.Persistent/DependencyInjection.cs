@@ -1,21 +1,32 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using Pizza.Persistent.EntityTypeContext;
+using Microsoft.Extensions.DependencyInjection;
 using Pizza.Application.Interfaces;
+using Pizza.Persistent.EntityTypeContext;
 
 namespace Pizza.Persistent
-{    
+{
     public static class DependencyInjection
     {
-        public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddDependency(this IServiceCollection services, IConfiguration configuration, bool IsDevelopment = false)
         {
-            var connectionString =  configuration.GetConnectionString("SqLite");
-            services.AddDbContext<Context>(option =>
+            if (IsDevelopment)
             {
-                option.UseSqlite(connectionString);
-            });
-            services.AddScoped<IContext>(provider =>
+                string? connectionString = configuration.GetConnectionString("MySql");
+                _ = services.AddDbContext<Context>(option =>
+                {
+                    _ = option.UseMySQL(connectionString);
+                });
+            }
+            else
+            {
+                string? connectionString = configuration.GetConnectionString("SqLite");
+                _ = services.AddDbContext<Context>(option =>
+                {
+                    _ = option.UseSqlite(connectionString);
+                });
+            }
+            _ = services.AddScoped<IContext>(provider =>
                provider.GetService<Context>() ?? new Context(new DbContextOptions<Context>()));
             return services;
         }
