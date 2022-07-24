@@ -4,11 +4,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Pizza.Application.Interfaces;
 using Pizza.Persistent.EntityTypeContext;
 
-namespace Pizza.Persistent
+namespace Pizza.Persistent.DependencyInjection
 {
-    public static class DependencyInjection
+    public static class DbDependencyInjection
     {
-        public static IServiceCollection AddDependency(this IServiceCollection services, IConfiguration configuration, bool IsDevelopment = false)
+        public static IServiceCollection AddDbDependency(this IServiceCollection services, IConfiguration configuration, bool IsDevelopment = false)
         {
             if (IsDevelopment)
             {

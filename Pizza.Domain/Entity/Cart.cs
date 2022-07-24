@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-
+using Pizza.Domain.Users;
 namespace Pizza.Domain.Entity
 {
     public class Cart : EntityBase

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Pizza.Application.Interfaces;
-using Pizza.Domain.Entity;
 using Pizza.Persistent.EntityTypeContext;
 
 namespace Pizza.Api.Controllers
@@ -18,20 +18,15 @@ namespace Pizza.Api.Controllers
         [HttpPost]
         public async Task<ICollection<int>> Test(List<int> numbers)
         {
-            _ = await context.Items.AddAsync(
-                new Item()
-                {
-                    Cart = new Cart(),
-                    CartId = 0,
-                    Id = 0,
-                    ImageUrl = "",
-                    Price = 0,
-                    Rating = 0,
-                    Title = "",
-                    Type = ""
-                });
-
-            await context.SaveChangesAsync(new CancellationToken());
+            _ = await context.Users.AddAsync(new Domain.Users.User()
+            {
+                AccessFailedCount = numbers.Count,
+                Cart = new Domain.Entity.Cart(),
+                Email = "",
+                LockoutEnd = DateTimeOffset.Now,
+                LockoutEnabled = false
+            });            
+            _ = await context.SaveChangesAsync(new CancellationToken());
             return numbers;
         }
     }

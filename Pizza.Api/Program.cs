@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Pizza.Persistent;
+using Pizza.Persistent.DependencyInjection;
 using Pizza.Persistent.EntityTypeContext;
 
 namespace Pizza.Api
@@ -12,9 +13,10 @@ namespace Pizza.Api
             _ = builder.Services.AddControllers();
             _ = builder.Services.AddEndpointsApiExplorer();
             _ = builder.Services.AddSwaggerGen();
-            _ = builder.Services.AddDependency(builder.Configuration, builder.Environment.IsDevelopment());
-            /*_ = builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<Context>();*/
-
+            _ = builder.Services.AddDbDependency(builder.Configuration, builder.Environment.IsDevelopment());
+            _ = builder.Services.AddIdentityDependency();
+            _ = builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<Context>();
+            
             WebApplication? app = builder.Build();
 
             using Context? db = app.Services.CreateScope().ServiceProvider.GetRequiredService<Context>();
@@ -26,8 +28,8 @@ namespace Pizza.Api
                 _ = app.UseSwaggerUI();
             }
             _ = app.UseHttpsRedirection();
-            //_ = app.UseAuthentication();
-            //_ = app.UseAuthorization();
+            _ = app.UseAuthentication();
+            _ = app.UseAuthorization();
             _ = app.MapControllers();
             app.Run();
         }   

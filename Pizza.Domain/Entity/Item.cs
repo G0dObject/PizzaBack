@@ -5,9 +5,10 @@ namespace Pizza.Domain.Entity
 {
     public class Item : EntityBase
     {
-        
 
-        public int? CartId { get; set; }
+      
+
+        public int? CartId { get; set; } 
         public virtual Cart? Cart { get; set; }
 
         public virtual string? Type { get; set; }
