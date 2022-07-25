@@ -7,14 +7,13 @@ using Pizza.Persistent.EntityTypeConfiguration;
 using Pizza.Domain.Users;
 namespace Pizza.Persistent.EntityTypeContext
 {
-    public class Context : IdentityDbContext<User>, IContext
+    public class Context : IdentityDbContext<User,Role,int>, IContext
     {
         public Context(DbContextOptions<Context> contextOptions) : base(contextOptions) { }
         public DbSet<Item>? Items { get; set; }
         public DbSet<Cart>? Carts { get; set; }
         public override DbSet<User>? Users{ get; set; }
-        public override DbSet<IdentityUserRole<string>>? UserRoles { get; set; }
-        public override DbSet<IdentityUserToken<string>>? UserTokens { get; set; }
+       
 
         protected override void OnModelCreating(ModelBuilder option)
         {

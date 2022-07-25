@@ -5,12 +5,12 @@ using Pizza.Domain.Entity;
 
 namespace Pizza.Persistent.EntityTypeConfiguration
 {
-    public class UserTokensOptionConfiguration : IEntityTypeConfiguration<IdentityUserToken<string>>
+    public class UserTokensOptionConfiguration : IEntityTypeConfiguration<IdentityUserToken<int>>
     {
-        public void Configure(EntityTypeBuilder<IdentityUserToken<string>> builder)
+        public void Configure(EntityTypeBuilder<IdentityUserToken<int>> builder)
         {
-            _ = builder.HasKey(i => i.UserId);
-            builder.Property(f => f.UserId).HasMaxLength(128);
+            _ = builder.HasKey(i => i.UserId);        
+            
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Pizza.Persistent.DependencyInjection
                     option.SignIn.RequireConfirmedAccount = true;                                                          
                 });
 
-            builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), services);
+            builder = new IdentityBuilder(builder.UserType, typeof(Role), services);
             _ = builder.AddEntityFrameworkStores<Context>();
             return services;
         }
