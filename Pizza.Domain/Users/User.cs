@@ -6,7 +6,7 @@ namespace Pizza.Domain.Users
     public class User : IdentityUser<int>
     {      
         public int? CartId { get; set; }
-        public Cart? Cart { get; set; }        
+        public Cart? Cart { get; set; }      
 
     }
 }

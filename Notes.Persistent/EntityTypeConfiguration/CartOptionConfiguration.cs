@@ -9,7 +9,7 @@ namespace Pizza.Persistent.EntityTypeConfiguration
         public void Configure(EntityTypeBuilder<Cart> builder)
         {
             _ = builder.HasKey(c => c.Id);
-            _ = builder.HasMany(c => c.Items);
+            _ = builder.HasMany(c => c.Items);            
         }
     }
 }

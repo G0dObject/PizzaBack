@@ -19,7 +19,7 @@ namespace Pizza.Persistent.DependencyInjection
                     option.SignIn.RequireConfirmedEmail = false;
 
                     option.Password.RequireDigit = false;
-                    option.SignIn.RequireConfirmedAccount = true;                                                          
+                    option.SignIn.RequireConfirmedAccount = true;                                            
                 });
 
             builder = new IdentityBuilder(builder.UserType, typeof(Role), services);

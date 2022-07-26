@@ -1,7 +1,7 @@
 ﻿{
   "profiles": {
     "Development": {
-      "applicationUrl": "https://localfhost:7000;http://locafhost:7001",
+      "applicationUrl": "https://localhost:7000;http://locahost:7001",
       "commandName": "Project",
       "dotnetRunMessages": true,
       "environmentVariables": {
@@ -13,7 +13,8 @@
     "Production": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localfhost:5000;http://localfhost:5001",
+      "applicationUrl": "https://localhost:5030;http://localhost:5031",
+      
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
       }
