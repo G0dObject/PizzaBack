@@ -8,7 +8,7 @@ namespace Pizza.Application.Common.Mapping
     {
         public AppMappingProfile()
         {
-            CreateMap<CreateUser, User>();
+            CreateMap<CreateUser, User>();                            
         }
     }
 }

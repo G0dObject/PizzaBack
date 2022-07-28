@@ -4,29 +4,32 @@ using Pizza.Application.Common.Mapping.Entity;
 using Pizza.Application.Interfaces;
 using Pizza.Domain.Users;
 using Pizza.Persistent.EntityTypeContext;
+using Pizza.Persistent.Repositories;
 
 namespace Pizza.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Login : ControllerBase
+    public class LoginController : ControllerBase
     {
         private readonly IContext _context;
         private readonly IMapper _mapper;
-        public Login(Context context, IMapper mapper)
+        private UserRepository _userRepository;
+        public LoginController(Context context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
+            _userRepository = new UserRepository(_context);
         }
 
         [HttpPost]
         public async Task<StatusCodeResult> Register(CreateUser user)
         {
-            var tempuser = _mapper.Map<User>(user);
-            tempuser.Cart = new Domain.Entity.Cart();
-            _ = await _context.Users.AddAsync(tempuser);            
-            _ = await _context.SaveChangesAsync(new CancellationToken());
+            await _userRepository.Add(_mapper.Map<User>(user));
+            await _userRepository.Remove(await _userRepository.GetById(1));
             return Ok();
         }
+
+        
     }
 }
