@@ -14,7 +14,8 @@ namespace Pizza.Api.Controllers
     {
         private readonly IContext _context;
         private readonly IMapper _mapper;
-        private UserRepository _userRepository;
+        private readonly UserRepository _userRepository;
+
         public LoginController(Context context, IMapper mapper)
         {
             _context = context;
@@ -26,10 +27,7 @@ namespace Pizza.Api.Controllers
         public async Task<StatusCodeResult> Register(CreateUser user)
         {
             await _userRepository.Add(_mapper.Map<User>(user));
-            await _userRepository.Remove(await _userRepository.GetById(1));
             return Ok();
         }
-
-        
     }
 }
