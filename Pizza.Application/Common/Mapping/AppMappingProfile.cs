@@ -8,7 +8,8 @@ namespace Pizza.Application.Common.Mapping
     {
         public AppMappingProfile()
         {
-            CreateMap<CreateUser, User>();                            
+
+            _ = CreateMap<CreateUser, User>().ForMember(f => f.PasswordHash, c => c.MapFrom(c => MD5Hash.Hash.Content(c.Password)));
         }
     }
 }
