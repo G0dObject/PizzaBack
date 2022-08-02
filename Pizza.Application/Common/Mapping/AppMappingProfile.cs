@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Pizza.Application.Common.Mapping.Entity;
 using Pizza.Domain.Users;
+using MD5Hash;
 
 namespace Pizza.Application.Common.Mapping
 {
@@ -8,7 +9,7 @@ namespace Pizza.Application.Common.Mapping
     {
         public AppMappingProfile()
         {
-            CreateMap<CreateUser, User>();                            
+            _ = CreateMap<CreateUser, User>().ForMember(f => f.PasswordHash, c => c.MapFrom(c => c.Password.GetMD5()));
         }
     }
 }
