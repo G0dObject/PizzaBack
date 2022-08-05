@@ -1,4 +1,4 @@
-using Pizza.Application.Common.Mapping;
+using Pizza.Application.Common.Mapping.Profiles;
 using Pizza.Persistent;
 using Pizza.Persistent.DependencyInjection;
 using Pizza.Persistent.EntityTypeContext;

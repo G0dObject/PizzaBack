@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Pizza.Application.Common.Mapping.Entity;
+using Pizza.Application.Common.Mapping.Entity.User;
 using Pizza.Application.Interfaces;
 using Pizza.Domain.Users;
 using Pizza.Persistent.EntityTypeContext;
