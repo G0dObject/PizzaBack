@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MD5Hash;
 using Pizza.Application.Common.Mapping.Entity;
 using Pizza.Domain.Users;
 using MD5Hash;
