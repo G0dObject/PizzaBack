@@ -449,5 +449,4 @@ obj
 obj
 .vs
 /Pizza.Api/*.db
-/Pizza.Api/appsettings.json
-/Pizza.Api/appsettings.Development.json
+
