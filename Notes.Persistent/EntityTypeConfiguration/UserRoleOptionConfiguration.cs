@@ -7,7 +7,7 @@ namespace Pizza.Persistent.EntityTypeConfiguration
     public class UserRoleOptionConfiguration : IEntityTypeConfiguration<IdentityUserRole<int>>
     {
         public void Configure(EntityTypeBuilder<IdentityUserRole<int>> builder)
-        {            
+        {
         }
     }
 }

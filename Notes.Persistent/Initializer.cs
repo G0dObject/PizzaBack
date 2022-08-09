@@ -5,7 +5,7 @@ namespace Pizza.Persistent
     {
         public static async Task Initialize(Context context)
         {
-           //await context.Database.EnsureDeletedAsync();
+           await context.Database.EnsureDeletedAsync();
            
            await context.Database.EnsureCreatedAsync();
         }

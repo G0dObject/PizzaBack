@@ -17,7 +17,14 @@ namespace Pizza.Api
             _ = builder.Services.AddDbDependency(builder.Configuration, builder.Environment.IsDevelopment());
             _ = builder.Services.AddIdentityDependency();
             _ = builder.Services.AddAutoMapper(typeof(AppMappingProfile));
-            
+            _ = builder.Services.AddCors();
+            _ = builder.WebHost.UseKestrel(option =>
+            {
+                option.ConfigureHttpsDefaults(https =>
+                {
+                });
+            });
+
             WebApplication? app = builder.Build();
 
             using Context? db = app.Services.CreateScope().ServiceProvider.GetRequiredService<Context>();
@@ -25,14 +32,16 @@ namespace Pizza.Api
 
             if (app.Environment.IsDevelopment())
             {
-                _ = app.UseSwagger();
-                _ = app.UseSwaggerUI();
+               
             }
+            _ = app.UseSwagger();
+            _ = app.UseSwaggerUI();
 
             _ = app.UseHttpsRedirection();
             _ = app.UseAuthentication();
             _ = app.UseAuthorization();
             _ = app.MapControllers();
+            _ = app.UseCors(builder => builder.AllowAnyOrigin());
 
             _ = app.Map("/", () => "this Work");
             app.Run();

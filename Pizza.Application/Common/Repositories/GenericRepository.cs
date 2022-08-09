@@ -2,7 +2,7 @@
 
 namespace Pizza.Application.Common.Repositories
 {
-    public abstract class GenericRepository<T>
+    public abstract class GenericRepository<T> where T : class
     {
         IContext _context;
 

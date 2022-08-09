@@ -9,7 +9,7 @@ namespace Pizza.Persistent.EntityTypeContext
     public class Context : IdentityDbContext<User, Role, int>, IContext
     {
         public Context(DbContextOptions<Context> contextOptions) : base(contextOptions) { }
-        public DbSet<Item>? Items { get; set; }
+        public DbSet<Product>? Products { get; set; }
         public DbSet<Cart>? Carts { get; set; }
         public override DbSet<User>? Users { get; set; }
 
@@ -17,7 +17,7 @@ namespace Pizza.Persistent.EntityTypeContext
         protected override void OnModelCreating(ModelBuilder option)
         {
             _ = option.ApplyConfiguration(new UserOptionConfiguration());
-            _ = option.ApplyConfiguration(new ItemOptionConfiguration());
+            _ = option.ApplyConfiguration(new ProductOptionConfiguration());
             _ = option.ApplyConfiguration(new CartOptionConfiguration());
             _ = option.ApplyConfiguration(new UserRoleOptionConfiguration());
             _ = option.ApplyConfiguration(new UserTokensOptionConfiguration());

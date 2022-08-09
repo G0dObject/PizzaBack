@@ -1,23 +1,27 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pizza.Domain.Entity
 {
-    public class Item : EntityBase
-    {    
-        public int? CartId { get; set; } 
+    public class Product : EntityBase
+    {
+        public int? CartId { get; set; }
         public virtual Cart? Cart { get; set; }
-
-        public virtual string? Type { get; set; }
         [Required]
         public string? Title { get; set; }
+
+        [Required]
+        public string? Type { get; set; }
+
+        [Required]
+        public string? Category { get; set; }
+
+        [Required]
         public string? ImageUrl { get; set; }
         public decimal? Rating { get; set; }
 
         [Required]
         public virtual decimal? Price { get; set; }
 
-        
-        
+        //public string? Size { get; set; }
     }
 }
