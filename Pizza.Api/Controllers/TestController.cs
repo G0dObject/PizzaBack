@@ -23,9 +23,9 @@ namespace Pizza.Api.Controllers
             _itemRepository = new ProductRepository(_context, _mapper);
         }
         [HttpPost]
-        public async Task<StatusCodeResult> AddItem(Product product)
+        public async Task<StatusCodeResult> AddItem(CreateProduct product)
         {
-            await _itemRepository.Add(product);
+            await _itemRepository.Add(_mapper.Map<Product>(product));
             return Ok();
         }
         [HttpGet]

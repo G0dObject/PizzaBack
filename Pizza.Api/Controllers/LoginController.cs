@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Pizza.Application.Common.Mapping.Entity.User;
 using Pizza.Application.Interfaces;
@@ -16,6 +17,10 @@ namespace Pizza.Api.Controllers
         private readonly IMapper _mapper;
         private readonly UserRepository _userRepository;
 
+        //private readonly UserManager<User> _userManager;
+        //private readonly SignInManager<User> _signInManager;
+
+
         public LoginController(Context context, IMapper mapper)
         {
             _context = context;
@@ -24,9 +29,10 @@ namespace Pizza.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<StatusCodeResult> Register(CreateUser user)
+        public async Task<StatusCodeResult> Register(CreateUser cuser)
         {
-            await _userRepository.Add(_mapper.Map<User>(user));
+            await _userRepository.Add(_mapper.Map<User>(cuser));
+
             return Ok();
         }
     }
