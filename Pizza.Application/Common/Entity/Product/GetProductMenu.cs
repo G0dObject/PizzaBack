@@ -1,29 +1,27 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Pizza.Domain.Entity
+namespace Pizza.Application.Common.Entity.Product
 {
-	public class Product : EntityBase
+	public class GetProductMenu
 	{
-		public int? CartId { get; set; }
-		public virtual Cart? Cart { get; set; }
-
-		public int? TypeId { get; set; }
-		public virtual Type? Type { get; set; }
-
-		public int? SizeId { get; set; }
-		public virtual Size? Size { get; set; }
-
+		[Required]
+		public int Id { get; set; }
 		[Required]
 		public string? Title { get; set; }
 		[Required]
+		public string? Type { get; set; }
+		[Required]
 		public string? Category { get; set; }
-		[Required]
-		public string? ImageUrl { get; set; }
 
-		public decimal? Rating { get; set; }
 		[Required]
+		[DataType(DataType.ImageUrl)]
+		public string? ImageUrl { get; set; }
+		public decimal? Rating { get; set; }
+
+		[Required]
+		[DataType(DataType.Currency)]
 		public virtual decimal? Price { get; set; }
 
-
+		public string? Size { get; set; }
 	}
 }

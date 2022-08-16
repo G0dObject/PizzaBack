@@ -16,6 +16,5 @@ namespace Pizza.Application.Common.Repositories
         public abstract Task<IEnumerable<T>> GetAll();
 
         public virtual async Task Save() => _ = await _context.SaveChangesAsync(new CancellationToken());
-
     }
 }

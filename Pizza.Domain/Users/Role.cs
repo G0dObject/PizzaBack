@@ -2,8 +2,8 @@
 
 namespace Pizza.Domain.Users
 {
-    public class Role : IdentityRole<int>
-    {
+	public class Role : IdentityRole<int>
+	{
 
-    }
+	}
 }

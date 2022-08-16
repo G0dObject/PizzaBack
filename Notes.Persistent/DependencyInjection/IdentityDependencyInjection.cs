@@ -5,26 +5,26 @@ using Pizza.Persistent.EntityTypeContext;
 
 namespace Pizza.Persistent.DependencyInjection
 {
-    public static class IdentityDependencyInjection
-    {
-        public static IServiceCollection AddIdentityDependency(this IServiceCollection services)
-        {
-            IdentityBuilder? builder = services.AddIdentityCore<User>(
-                option =>
-                {
-                    option.Stores.MaxLengthForKeys = 128;
-                    option.User.RequireUniqueEmail = true;
+	public static class IdentityDependencyInjection
+	{
+		public static IServiceCollection AddIdentityDependency(this IServiceCollection services)
+		{
+			IdentityBuilder? builder = services.AddIdentity<User, Role>(option =>
+			{
+				option.User.RequireUniqueEmail = false;
 
-                    option.SignIn.RequireConfirmedPhoneNumber = false;
-                    option.SignIn.RequireConfirmedEmail = false;
+				option.Stores.MaxLengthForKeys = 128;
 
-                    option.Password.RequireDigit = false;
-                    option.SignIn.RequireConfirmedAccount = true;                                            
-                });
+				option.Password.RequireUppercase = false;
+				option.Password.RequireNonAlphanumeric = false;
+				option.Password.RequireDigit = false;
 
-            builder = new IdentityBuilder(builder.UserType, typeof(Role), services);
-            _ = builder.AddEntityFrameworkStores<Context>();
-            return services;
-        }
-    }
+				option.SignIn.RequireConfirmedPhoneNumber = false;
+				option.SignIn.RequireConfirmedEmail = false;
+				option.SignIn.RequireConfirmedAccount = false;
+			}).AddEntityFrameworkStores<Context>().AddDefaultTokenProviders();
+		
+			return services;
+		}
+	}
 }

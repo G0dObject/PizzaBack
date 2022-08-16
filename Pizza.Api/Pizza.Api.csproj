@@ -12,10 +12,6 @@
   </PropertyGroup>
 
   <ItemGroup>
- 
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="API.db" />
 
   </ItemGroup>
@@ -32,8 +28,9 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.7" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.22.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.22.0" />
   </ItemGroup>
 
   <ItemGroup>
