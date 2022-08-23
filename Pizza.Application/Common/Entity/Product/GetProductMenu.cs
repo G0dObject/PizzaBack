@@ -22,6 +22,6 @@ namespace Pizza.Application.Common.Entity.Product
 		[DataType(DataType.Currency)]
 		public virtual decimal? Price { get; set; }
 
-		public string? Size { get; set; }
+		public List<string>? Size { get; set; }
 	}
 }

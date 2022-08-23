@@ -31,8 +31,11 @@ namespace Pizza.Api.Controllers
 		{
 			await _itemRepository.Add(_mapper.Map<Product>(product));
 		}
-		
+
 		[HttpGet]
-		public async Task<JsonResult> GetAllFood() => new JsonResult(await _itemRepository.GetMenu());
+		public async Task<JsonResult> GetAllFood()
+		{
+			return new JsonResult(await _itemRepository.GetMenu());
+		}
 	}
 }

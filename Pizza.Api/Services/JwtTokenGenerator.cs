@@ -13,6 +13,7 @@ namespace Pizza.Api.Services
 		{
 			_configuration = configuration;
 		}
+
 		public JwtSecurityToken GenerateJwtToken(List<Claim> authClaims)
 		{
 			SymmetricSecurityKey? authSigningKey = new(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));

@@ -26,20 +26,14 @@ namespace Pizza.Application.Common.Repositories
 		public override async Task<IEnumerable<Product>> GetAll() => await _context.Products!.ToListAsync();
 		public override async Task<Product> GetById(int id) => await _context.Products!.Where(u => u.Id.Equals(id)).FirstAsync();
 
-		public async Task<ICollection<GetProductMenu>> GetMenu()
-		{
-			var g = await _context.Products!.ToListAsync();
-			foreach (var item in g)
-			{
-				item.Size = _context.Sizes!.Find(item.SizeId);
-			}
-			return _mapper.Map<List<GetProductMenu>>(g);
-		}
+		public async Task<ICollection<GetProductMenu>> GetMenu() =>
+			_mapper.Map<List<GetProductMenu>>(await _context.Products!.Include(d => d.Sizes).ToListAsync());
+		
 
 		public override async Task Remove(Product entity)
 		{
 			_ = _context.Products!.Remove(entity);
-			await Save();
+			await Save(); 
 		}
 
 		public async Task RemoveAll()

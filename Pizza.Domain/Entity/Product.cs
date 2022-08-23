@@ -9,10 +9,8 @@ namespace Pizza.Domain.Entity
 
 		public int? TypeId { get; set; }
 		public virtual Type? Type { get; set; }
-
-		public int? SizeId { get; set; }
-		public virtual Size? Size { get; set; }
-
+		public ICollection<Size>? Sizes { get; set; }
+		
 		[Required]
 		public string? Title { get; set; }
 		[Required]
@@ -23,7 +21,6 @@ namespace Pizza.Domain.Entity
 		public decimal? Rating { get; set; }
 		[Required]
 		public virtual decimal? Price { get; set; }
-
 
 	}
 }
