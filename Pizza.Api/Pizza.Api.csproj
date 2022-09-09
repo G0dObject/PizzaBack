@@ -13,6 +13,8 @@
 
   <ItemGroup>
     <None Remove="API.db" />
+    <None Remove="API.db-shm" />
+    <None Remove="API.db-wal" />
 
   </ItemGroup>
 
@@ -20,10 +22,6 @@
     <Content Include="Properties\launchSettings.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Include="API.db" />
   </ItemGroup>
 
   <ItemGroup>

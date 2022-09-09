@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.IdentityModel.Tokens;
 using Pizza.Api.Services;
 using Pizza.Application.Common.Mapping.Profiles;
@@ -25,7 +26,7 @@ namespace Pizza.Api
 			_ = builder.Services.AddDbDependency(builder.Configuration, builder.Environment.IsDevelopment());
 			_ = builder.Services.AddIdentityDependency();
 			_ = builder.Services.AddAuthenticationDependency(builder.Configuration);
-
+			
 			_ = builder.Services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
 
 			WebApplication? app = builder.Build();
@@ -35,10 +36,13 @@ namespace Pizza.Api
 
 			if (app.Environment.IsDevelopment())
 			{
-				_ = app.UseSwagger();
-				_ = app.UseSwaggerUI();
+				
 			}
+			_ = app.UseSwagger();
+			_ = app.UseSwaggerUI();
 			_ = app.UseHttpsRedirection();
+
+			app.Map("/", ()=>"Still Work");
 
 			_ = app.UseRouting();
 			_ = app.UseAuthentication();
