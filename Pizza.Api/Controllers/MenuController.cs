@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Pizza.Application.Common.Entity.Product;
 using Pizza.Application.Common.Repositories;
 using Pizza.Application.Interfaces;
 using Pizza.Domain.Entity;
 using Pizza.Persistent.EntityTypeContext;
-
+using System.ComponentModel;
 
 namespace Pizza.Api.Controllers
 {
@@ -26,7 +27,7 @@ namespace Pizza.Api.Controllers
 		}
 		[HttpGet]
 		[Route("Items")]
-		public List<Product> GetMenuByCategory(int category, string sortBy, string order, int page, int limits)
+		public List<GetProductMenu> GetMenuByCategory(int category, string sortBy, string order, int page, int limits)
 		{
 			Func<Product, object> orderByFunc = new Func<Product, object>(f => f.Id);
 
@@ -36,12 +37,11 @@ namespace Pizza.Api.Controllers
 				_ => item => item.Id
 			};
 
-			IQueryable<Product> _First = _context.Products.AsQueryable();
+			Microsoft.EntityFrameworkCore.Query.IIncludableQueryable<Product, object> _First = _context.Products.Include(f => f.Sizes).Include(f => f.Types);
 			IOrderedEnumerable<Product> _Sort = _First.OrderBy(orderByFunc);
 			IEnumerable<Product> _Category = category == 0 ? _Sort : _Sort.Where(w => w.Category == category);
 
-			return _Category.ToList();
-
+			return _mapper.Map<List<GetProductMenu>>(_Category.ToList());
 		}
 		//[Authorize]
 		[HttpPost]
@@ -51,9 +51,10 @@ namespace Pizza.Api.Controllers
 		}
 
 		[HttpGet]
-		public async Task<JsonResult> GetAllFood()
+		public List<GetProductMenu> GetAllFood()
 		{
-			return new JsonResult(await _itemRepository.GetMenu());
+			List<Product> source = _context.Products.Include(f => f.Sizes).Include(f => f.Types).ToList();
+			return _mapper.Map<List<GetProductMenu>>(source);
 		}
 	}
 }

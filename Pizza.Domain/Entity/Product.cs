@@ -4,24 +4,14 @@ namespace Pizza.Domain.Entity
 {
 	public class Product : EntityBase
 	{
-		public int? CartId { get; set; }
-		public virtual Cart? Cart { get; set; }
-
-		public virtual ICollection<Type?> Types { get; set; }
-
-		public ICollection<Size>? Sizes { get; set; }
-
-		[Required]
+		public virtual List<Type>? Types { get; set; }
+		public List<Size>? Sizes { get; set; }
+		public virtual List<Order>? Order { get; set; }
 		public string? Title { get; set; }
-		[Required]
-
 		[Range(0, 5)]
 		public int? Category { get; set; }
-		[Required]
 		public string? ImageUrl { get; set; }
-
 		public decimal? Rating { get; set; }
-		[Required]
 		public virtual decimal? Price { get; set; }
 
 	}

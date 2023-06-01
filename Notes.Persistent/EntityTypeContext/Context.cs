@@ -10,7 +10,7 @@ namespace Pizza.Persistent.EntityTypeContext
 	{
 		public Context(DbContextOptions<Context> contextOptions) : base(contextOptions) { }
 		public DbSet<Product>? Products { get; set; }
-		public DbSet<Cart>? Carts { get; set; }
+		public DbSet<Order>? Orders { get; set; }
 		public override DbSet<User>? Users { get; set; }
 		public DbSet<Domain.Entity.Type>? Types { get; set; }
 		public DbSet<Size>? Sizes { get; set; }
@@ -20,7 +20,7 @@ namespace Pizza.Persistent.EntityTypeContext
 		{
 			_ = option.ApplyConfiguration(new UserOptionConfiguration());
 			_ = option.ApplyConfiguration(new ProductOptionConfiguration());
-			_ = option.ApplyConfiguration(new CartOptionConfiguration());
+			_ = option.ApplyConfiguration(new OrderOptionConfiguration());
 			_ = option.ApplyConfiguration(new UserRoleOptionConfiguration());
 			_ = option.ApplyConfiguration(new UserTokensOptionConfiguration());
 			_ = option.ApplyConfiguration(new TypeOptionConfiguration());

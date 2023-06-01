@@ -8,7 +8,7 @@ namespace Pizza.Application.Common.Entity.Product
 		public string? Title { get; set; }
 
 		[Required]
-		public List<string>? Sizes { get; set; }
+		public List<int>? Sizes { get; set; }
 
 
 		public List<string>? Types { get; set; }

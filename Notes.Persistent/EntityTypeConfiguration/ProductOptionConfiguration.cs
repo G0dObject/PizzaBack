@@ -12,8 +12,6 @@ namespace Pizza.Persistent.EntityTypeConfiguration
 			_ = builder.Property(p => p.Rating);
 			_ = builder.Property(p => p.Price);
 			_ = builder.Property(p => p.ImageUrl);
-			
-			
 		}
 	}
 }

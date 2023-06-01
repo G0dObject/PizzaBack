@@ -14,8 +14,16 @@ namespace Pizza.Application.Common.Mapping.Profiles
 		{
 			_ = CreateMap<CreateUser, User>().ForMember(f => f.PasswordHash, c => c.MapFrom(c => c.Password));
 
-			_ = CreateMap<GetProductMenu, Product>();
-			_ = CreateMap<Product, GetProductMenu>().ForPath(f => f.Size, c => c.MapFrom(f => f.Sizes.Select(f => f.SizeName)));
+
+			//_ = CreateMap<string, Type>().ForMember(f => f.TypeName, f => f.MapFrom(f => f)).ReverseMap();
+			CreateMap<int, int>();
+			_ = CreateMap<int, Size>().ForMember(f => f.SizeName, f => f.MapFrom(f => f)).ReverseMap();
+
+			_ = CreateMap<GetProductMenu, Product>().ForMember(f => f.Id, f => f.MapFrom(f => f.Id)).ReverseMap();
+
+			//.ForMember(f => f.Sizes, c => c.MapFrom(f => f.Sizes!.Select(f => new Size() { SizeName = f })))
+			//	.ForMember(f => f.Types, c => c.MapFrom(f => f.Types!.Select(f => new Type() { TypeName = f }))).ReverseMap();
+
 			_ = CreateMap<CreateProduct, Product>()
 			.ForMember(f => f.Sizes, c => c.MapFrom(f => f.Sizes!.Select(f => new Size() { SizeName = f })))
 				.ForMember(f => f.Types, c => c.MapFrom(f => f.Types!.Select(f => new Type() { TypeName = f })));

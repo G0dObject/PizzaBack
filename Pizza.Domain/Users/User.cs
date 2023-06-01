@@ -7,8 +7,5 @@ namespace Pizza.Domain.Users
 
 	public class User : IdentityUser<int>
 	{
-		public int? CartId { get; set; }
-		[JsonIgnore]
-		public Cart? Cart { get; set; } = new Cart();
 	}
 }

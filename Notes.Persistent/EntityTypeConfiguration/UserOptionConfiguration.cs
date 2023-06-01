@@ -12,8 +12,6 @@ namespace Pizza.Persistent.EntityTypeConfiguration
 			_ = builder.Property(u => u.UserName).HasMaxLength(30);
 			_ = builder.Property(u => u.Email);
 			_ = builder.Property(u => u.PasswordHash);
-
-			_ = builder.HasOne(u => u.Cart).WithOne(e => e.User);
 		}
 	}
 }
