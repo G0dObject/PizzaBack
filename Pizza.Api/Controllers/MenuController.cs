@@ -24,8 +24,26 @@ namespace Pizza.Api.Controllers
 			_mapper = mapper;
 			_itemRepository = new ProductRepository(_context, _mapper);
 		}
+		[HttpGet]
+		[Route("Items")]
+		public List<Product> GetMenuByCategory(int category, string sortBy, string order, int page, int limits)
+		{
+			Func<Product, object> orderByFunc = new Func<Product, object>(f => f.Id);
 
-		[Authorize]
+			orderByFunc = sortBy switch
+			{
+				"title" => item => item.Title,
+				_ => item => item.Id
+			};
+
+			IQueryable<Product> _First = _context.Products.AsQueryable();
+			IOrderedEnumerable<Product> _Sort = _First.OrderBy(orderByFunc);
+			IEnumerable<Product> _Category = category == 0 ? _Sort : _Sort.Where(w => w.Category == category);
+
+			return _Category.ToList();
+
+		}
+		//[Authorize]
 		[HttpPost]
 		public async Task AddFood(CreateProduct product)
 		{

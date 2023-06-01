@@ -7,14 +7,16 @@ namespace Pizza.Domain.Entity
 		public int? CartId { get; set; }
 		public virtual Cart? Cart { get; set; }
 
-		public int? TypeId { get; set; }
-		public virtual Type? Type { get; set; }
+		public virtual ICollection<Type?> Types { get; set; }
+
 		public ICollection<Size>? Sizes { get; set; }
-		
+
 		[Required]
 		public string? Title { get; set; }
 		[Required]
-		public string? Category { get; set; }
+
+		[Range(0, 5)]
+		public int? Category { get; set; }
 		[Required]
 		public string? ImageUrl { get; set; }
 

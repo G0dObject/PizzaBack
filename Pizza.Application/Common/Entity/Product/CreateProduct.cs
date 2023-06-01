@@ -8,13 +8,14 @@ namespace Pizza.Application.Common.Entity.Product
 		public string? Title { get; set; }
 
 		[Required]
-		public List<string>? Size { get; set; }
+		public List<string>? Sizes { get; set; }
 
 
-		public string? Type { get; set; }
+		public List<string>? Types { get; set; }
 
 		[Required]
-		public string? Category { get; set; }
+		[Range(0, 5)]
+		public int? Category { get; set; }
 
 		[Required]
 		public string? ImageUrl { get; set; }

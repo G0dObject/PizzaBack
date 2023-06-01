@@ -9,7 +9,7 @@ namespace Pizza.Persistent.EntityTypeConfiguration
 		{
 			_ = builder.HasKey(t => t.Id);
 
-			_ = builder.HasMany(t => t.Products);
+			_ = builder.HasMany(t => t.Products).WithMany(f => f.Types);
 		}
 	}
 }

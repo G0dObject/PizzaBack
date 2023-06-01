@@ -450,3 +450,5 @@ obj
 .vs
 /Pizza.Api/*.db
 
+*.db-wal
+*.db-shm
