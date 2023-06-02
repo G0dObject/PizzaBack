@@ -8,6 +8,7 @@ using Pizza.Application.Interfaces;
 using Pizza.Domain.Entity;
 using Pizza.Persistent.EntityTypeContext;
 using System.ComponentModel;
+using System.Linq;
 
 namespace Pizza.Api.Controllers
 {
@@ -27,21 +28,36 @@ namespace Pizza.Api.Controllers
 		}
 		[HttpGet]
 		[Route("Items")]
-		public List<GetProductMenu> GetMenuByCategory(int category, string sortBy, string order, int page, int limits)
+		public List<GetProductMenu> GetMenuByCategory(int category, string sortBy, string order, int page, int limit)
 		{
 			Func<Product, object> orderByFunc = new Func<Product, object>(f => f.Id);
 
 			orderByFunc = sortBy switch
 			{
+				"price" => item => item.Price,
 				"title" => item => item.Title,
+				"rating" => item => item.Rating,
+
 				_ => item => item.Id
 			};
 
-			Microsoft.EntityFrameworkCore.Query.IIncludableQueryable<Product, object> _First = _context.Products.Include(f => f.Sizes).Include(f => f.Types);
+			List<Product> _First = _context.Products.Include(f => f.Sizes).Include(f => f.Types).ToList();
 			IOrderedEnumerable<Product> _Sort = _First.OrderBy(orderByFunc);
 			IEnumerable<Product> _Category = category == 0 ? _Sort : _Sort.Where(w => w.Category == category);
+			IEnumerable<Product> _Page = page <= 1 ? _Category : _Category.Skip((page - 1) * limit);
+			List<Product> limits = _Page.Take(limit).ToList();
+			IEnumerable<Product> ord = order == "asc" ? limits : limits;//_Category.Reverse().ToList();
 
-			return _mapper.Map<List<GetProductMenu>>(_Category.ToList());
+
+			List<Product> List = ord.ToList();
+			List<GetProductMenu> mapped = _mapper.Map<List<GetProductMenu>>(List.ToList());
+
+			for (int i = 0; i < mapped.Count; i++)
+			{
+				mapped[i].Id = List[i].Id;
+				mapped[i].Sizes = List[i].Sizes.Select(f => f.SizeName).ToList();
+			}
+			return mapped;
 		}
 		//[Authorize]
 		[HttpPost]
@@ -54,7 +70,29 @@ namespace Pizza.Api.Controllers
 		public List<GetProductMenu> GetAllFood()
 		{
 			List<Product> source = _context.Products.Include(f => f.Sizes).Include(f => f.Types).ToList();
-			return _mapper.Map<List<GetProductMenu>>(source);
+			List<GetProductMenu> mapped = _mapper.Map<List<GetProductMenu>>(source);
+			for (int i = 0; i < source.Count; i++)
+			{
+				mapped[i].Id = source[i].Id;
+				mapped[i].Sizes = source[i].Sizes.Select(f => f.SizeName).ToList();
+			}
+			return mapped;
+		}
+		[HttpDelete]
+		public void DeleteById([FromQuery] int id)
+		{
+			_context.Products.Remove(_context.Products.First(f => f.Id == id));
+			_context.SaveChangesAsync(new CancellationToken());
+		}
+		[HttpGet]
+		[Route("lastid")]
+		public int GetLastId()
+		{
+			if (_context.Products.Count() == 0)
+			{
+				return 0;
+			}
+			return _context.Products.Max(f => f.Id);
 		}
 	}
 }

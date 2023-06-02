@@ -21,6 +21,7 @@ namespace Pizza.Api
 			_ = builder.Services.AddControllers();
 			_ = builder.Services.AddEndpointsApiExplorer();
 			_ = builder.Services.AddSwaggerGen();
+			_ = builder.Services.AddScoped<SeedService>();
 			_ = builder.Services.AddAutoMapper(typeof(AppMappingProfile));
 			_ = builder.Services.AddCors(f => f.AddPolicy("test", f =>
 			{
@@ -41,6 +42,12 @@ namespace Pizza.Api
 
 			using Context? db = app.Services.CreateScope().ServiceProvider.GetRequiredService<Context>();
 			_ = Task.Run(async () => await Initializer.Initialize(db));
+
+
+			using SeedService service = app.Services.CreateScope().ServiceProvider.GetRequiredService<SeedService>();
+			_ = Task.Run(async () => await service.Seed());
+
+
 
 			if (app.Environment.IsDevelopment())
 			{

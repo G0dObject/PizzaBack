@@ -65,24 +65,5 @@ namespace Pizza.Api.Controllers
 			}
 			return Unauthorized();
 		}
-		[HttpPost]
-		[Route("Register")]
-		public async Task<IActionResult> Register(CreateUser model)
-		{
-			User userExists = await _userManager.FindByNameAsync(model.UserName);
-			if (userExists != null)
-				return StatusCode(StatusCodes.Status409Conflict, "Alredy exist");
-
-			User user = new()
-			{
-				Email = model.Email,
-				SecurityStamp = Guid.NewGuid().ToString(),
-				UserName = model.UserName
-			};
-			IdentityResult result = await _userManager.CreateAsync(user, model.Password);
-			return !result.Succeeded
-				? StatusCode(StatusCodes.Status400BadRequest, "Create Failed")
-				: Ok("User created successfully!");
-		}
 	}
 }

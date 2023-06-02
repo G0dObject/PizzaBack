@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Pizza.Application.Common.Entity.Order;
 using Pizza.Application.Interfaces;
 using Pizza.Domain.Entity;
+using System.Collections.Generic;
 
 namespace Pizza.Api.Controllers
 {
@@ -11,10 +13,11 @@ namespace Pizza.Api.Controllers
 	[ApiController]
 	public class OrderController : ControllerBase
 	{
-		private IContext _context;
-		public OrderController(IContext context)
+		private IContext _context; private readonly IMapper _mapper;
+		public OrderController(IContext context, IMapper mapper)
 		{
 			_context = context;
+			_mapper = mapper;
 		}
 
 
@@ -28,9 +31,19 @@ namespace Pizza.Api.Controllers
 		}
 
 		[HttpGet]
-		public async Task<List<Order>> GetAll()
+		public async Task<List<CreateOrder>> GetAll()
 		{
-			return _context.Orders.ToList();
+			List<Order> temp = _context.Orders.Include(f => f.Products).ToList();
+
+			List<CreateOrder> list = new List<CreateOrder>();
+			foreach (Order item in temp)
+			{
+				list.Add(new CreateOrder() { Total = item.Total, Amount = item.Amount, CustomerNumber = item.CustomerNumber, ProductsId = item.Products.Select(f => f.Id).ToList() });
+			}
+			return list;
+
+
+
 		}
 	}
 }
